@@ -1,15 +1,9 @@
-import { app, BrowserWindow } from 'electron';
+import { TrayMenu } from '@/electron/TrayMenu';
+import { app } from 'electron';
+import { AlarmWindow } from './electron/AlarmWindow';
+import { appManager } from './electron/AppManager';
 
-const createWindow = (): void => {
-  let win = new BrowserWindow({
-    width: 800,
-    height: 600,
-    webPreferences: {
-      nodeIntegration: true
-    }
-  });
-
-  win.loadFile('index.html');
-}
-
-app.on('ready', createWindow);
+app.on('ready', () => {
+  appManager.setTray(new TrayMenu());
+  appManager.setWindow('AlarmWindow', new AlarmWindow());
+});

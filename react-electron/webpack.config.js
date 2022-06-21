@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const path = require('path');
 
 const electronConfiguration = {
@@ -21,7 +22,14 @@ const electronConfiguration = {
   output: {
     path: __dirname + '/dist',
     filename: 'main.js'
-  }
+  },
+  plugins: [
+    new CopyPlugin({
+      patterns: [
+        { from: 'src/assets', to: 'assets' },
+      ],
+    }),
+  ],
 };
 
 const reactConfiguration = {
